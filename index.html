@@ -7,8 +7,29 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { background: linear-gradient(135deg, #f0f4f8, #e2e8f0); font-family: 'Cairo', sans-serif; padding: 20px 0; min-height: 100vh; }
-        .portal-card { background: white; border-radius: 30px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); padding: 40px 20px; text-align: center; max-width: 500px; width: 95%; margin: 0 auto; border-top: 8px solid #0984e3; }
+        /* تم تعديل الـ body لإضافة خاصية الـ Flexbox لضمان بقاء الفوتر بالأسفل */
+        body { 
+            background: linear-gradient(135deg, #f0f4f8, #e2e8f0); 
+            font-family: 'Cairo', sans-serif; 
+            min-height: 100vh; 
+            display: flex;
+            flex-direction: column;
+            padding-top: 40px; /* مسافة من الأعلى */
+            margin: 0;
+        }
+        
+        .portal-card { 
+            background: white; 
+            border-radius: 30px; 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1); 
+            padding: 40px 20px; 
+            text-align: center; 
+            max-width: 500px; 
+            width: 95%; 
+            margin: 0 auto 40px auto; /* إضافة مسافة من الأسفل */
+            border-top: 8px solid #0984e3; 
+        }
+        
         .logo-icon { font-size: 3.5rem; margin-bottom: 10px; }
         .input-code { font-size: 1.5rem; text-align: center; font-weight: bold; letter-spacing: 2px; border-radius: 15px; border: 2px solid #0984e3; padding: 15px; }
         .btn-search { background: #0984e3; color: white; font-weight: bold; border-radius: 15px; padding: 15px; font-size: 1.2rem; width: 100%; margin-top: 15px; transition: 0.3s; border: none; }
@@ -21,6 +42,26 @@
         .qr-img { width: 200px; height: 200px; border: 3px solid #ddd; border-radius: 15px; padding: 10px; margin-bottom: 15px; background: white; }
         .profile-img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 10px; border: 4px solid #0984e3; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .sibling-badge { position: absolute; top: 15px; right: 15px; background: #e74c3c; color: white; padding: 5px 10px; border-radius: 10px; font-size: 0.8rem; font-weight: bold; }
+
+        /* تصميم الفوتر (الشريط السفلي) */
+        .custom-footer {
+            margin-top: auto; /* يدفع الفوتر لأقصى الأسفل */
+            padding: 15px 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.4); /* تأثير زجاجي خفيف */
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(0,0,0,0.05);
+            color: #6c757d;
+            font-size: 0.95rem;
+            font-weight: 600;
+            width: 100%;
+        }
+        .custom-footer .dev-name {
+            color: #0984e3;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            font-family: sans-serif;
+        }
     </style>
 </head>
 <body>
@@ -28,7 +69,7 @@
 <div class="portal-card">
     <div class="logo-icon">⛪</div>
     <h3 class="fw-bold text-dark mb-2">بوابة استخراج الأكواد</h3>
-    <p class="text-muted mb-4">أدخل كودك ليظهر لك الـ QR الخاص بك وبكل إخوتك المسجلين.</p>
+    <p class="text-muted mb-4">أدخل كودك ليظهر لك الـ QR الخاص بحضورك في كورس دراسات كتابيه وتنميه</p>
     
     <input type="number" id="code-input" class="form-control input-code" placeholder="رقم الكود..." onkeypress="if(event.key === 'Enter') searchCode()">
     <button onclick="searchCode()" class="btn-search">🔍 بحث واستخراج</button>
@@ -36,6 +77,11 @@
     <!-- سيتم وضع الكروت هنا ديناميكياً -->
     <div class="results-container" id="results-container"></div>
 </div>
+
+<!-- الشريط السفلي (Footer) -->
+<footer class="custom-footer">
+    &copy; 2026 All Rights Reserved | Developed by <span class="dev-name">Chris Samuel</span>
+</footer>
 
 <script>
     let dbData = {};
